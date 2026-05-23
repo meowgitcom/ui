@@ -7,8 +7,7 @@ import androidx.compose.ui.text.TextStyle
 
 import LocalContentColor
 
-@Composable
-fun Text(
+@Composable fun Text(
     text: String,
     modifier: Modifier = Modifier,
     style: TextStyle = TextStyle.Default
