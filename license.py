@@ -1,5 +1,5 @@
 import hashlib, os, sys, xml.etree.ElementTree as ET
-sdk = ""/opt/android-sdk-linux"
+sdk = "/opt/android-sdk-linux"
 for r, _, fs in os.walk(sdk):
     if "package.xml" not in fs:
         continue
