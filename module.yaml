@@ -16,5 +16,5 @@ settings:
   publishing:
     enabled: true
     version: 0.0.1
-    group: "com.github.meowgit"
+    group: "com.github.meowgitcom"
     artifactId: ui
