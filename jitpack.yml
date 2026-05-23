@@ -2,7 +2,14 @@ jdk:
   - openjdk21
 install:
   - ./kotlin build || true
-  - yes | /opt/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager --licenses
-  - rm -rf build
-  - ./kotlin build
-  - mvn install:install-file -Dfile="$(find build -name '*.aar' | head -1)" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
+    - yes | /opt/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager --licenses
+    - |
+    find /opt/android-sdk-linux -name "package.xml" -exec awk -v RS='</license>' -F'<license id="' 'NF>1 { id=$NF; sub(/".*/, "", id); text=$NF; sub(/^[^>]+>/, "", text); printf "%s\0%s\0", id, text }' {} \; | while IFS= read -r -d '' id && IFS= read -r -d '' text; do
+    text="${text//&amp;/&}"; text="${text//&lt;/<}"; text="${text//&gt;/>}"; text="${text//&quot;/\"}"; text="${text//&apos;/\'}"
+    hash=$(printf "%s" "$text" | sha1sum | awk '{print $1}')
+    mkdir -p /opt/android-sdk-linux/licenses
+    printf "\n%s" "$hash" > "/opt/android-sdk-linux/licenses/$id"
+    done
+    - rm -rf build
+    - ./kotlin build
+    - mvn install:install-file -Dfile="$(find build -name '*.aar' | head -1)" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
