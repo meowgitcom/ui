@@ -26,12 +26,13 @@ data class Palette(
 )
 
 val LocalPalette = compositionLocalOf<Palette> { error("no palette provided") }
+val LocalContentColor = compositionLocalOf { Color.Unspecified }
 
 @Composable fun ApplyTheme(
     palette: Palette,
     content: @Composable () -> Unit
 ) {
-    CompositionLocalProvider(LocalPalette provides palette) {
+    CompositionLocalProvider(LocalPalette provides palette, LocalContentColor provides palette.foreground) {
         content()
     }
 }
