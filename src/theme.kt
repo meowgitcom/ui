@@ -1,4 +1,7 @@
 import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 
 data class Palette(
     val background: Color,
@@ -21,3 +24,14 @@ data class Palette(
     val input: Color,
     val ring: Color
 )
+
+val LocalPalette = compositionLocalOf<Palette> { error("no palette provided") }
+
+@Composable fun ApplyTheme(
+    palette: Palette,
+    content: @Composable () -> Unit
+) {
+    CompositionLocalProvider(LocalPalette provides palette) {
+        content()
+    }
+}
