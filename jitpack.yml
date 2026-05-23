@@ -1,6 +1,10 @@
 jdk:
   - openjdk21
+before_install:
+  - mkdir -p /opt/android-sdk-linux/licenses
+  - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" > /opt/android-sdk-linux/licenses/android-sdk-license
+  - echo "d975f751698a77b662f1254ddbeed3901e976f5a" >> /opt/android-sdk-linux/licenses/android-sdk-license
+  - echo "99097288192898274842183867ee147b4d06cbc5" > /opt/android-sdk-linux/licenses/android-sdk-preview-license
 install:
-  - yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
   - ./kotlin build
   - mvn install:install-file -Dfile="$(find build -name '*.aar' | head -1)" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
