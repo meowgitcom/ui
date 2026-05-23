@@ -1,5 +1,7 @@
 jdk:
   - openjdk21
+before_install:
+  - yes | sdkmanager --licenses > /dev/null 2>&1 || true
 install:
   - ./kotlin build
   - mvn install:install-file -Dfile="$(find build -name '*.aar' | head -1)" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
