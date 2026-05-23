@@ -6,4 +6,4 @@ install:
   - python license.py
   - rm -rf build
   - ./kotlin build
-  - mvn install:install-file -Dfile="$(find build -name '*.aar' | head -1)" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
+  - AAR="$(find build -name '*.aar' | head -1)"; test -n "$AAR"; mvn install:install-file -Dfile="$AAR" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
