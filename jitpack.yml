@@ -1,0 +1,5 @@
+jdk:
+  - openjdk21
+install:
+  - ./kotlin build
+  - mvn install:install-file -Dfile="$(find build -name '*.aar' | head -1)" -DgroupId=com.github.meowgit -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
