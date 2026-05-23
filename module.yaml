@@ -1,0 +1,10 @@
+product:
+  type: kmp/lib
+  platforms: [ android ]
+
+dependencies:
+  - $compose.foundation
+  - $compose.material3
+
+settings:
+  compose: enabled
