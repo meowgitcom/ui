@@ -1,20 +1,24 @@
 product:
   type: kmp/lib
-  platforms: [ android ]
+  platforms: [ android, jvm ]
 
 dependencies:
   - $compose.foundation
   - $compose.material3
 
 repositories:
-  - id: mavenLocal
-    url: mavenLocal
-    publish: true
+    - id: github
+      url: https://maven.pkg.github.com/meowgitcom/ui
+      publish: true
+      credentials:
+        file: ./local.properties
+        usernameKey: github.user
+        passwordKey: github.token
 
 settings:
   compose: enabled
   publishing:
     enabled: true
     version: 0.0.1
-    group: "com.github.meowgitcom"
+    group: "com.meowgit"
     artifactId: ui

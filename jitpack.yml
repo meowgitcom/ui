@@ -1,9 +1,0 @@
-jdk:
-  - openjdk21
-install:
-  - ./kotlin build || true
-  - yes | /opt/android-sdk-linux/cmdline-tools/latest/bin/sdkmanager --licenses
-  - python license.py
-  - rm -rf build
-  - ./kotlin build
-  - AAR="$(find build -name '*.aar' | head -1)"; test -n "$AAR"; mvn install:install-file -Dfile="$AAR" -DgroupId=com.github.meowgitcom -DartifactId=ui -Dversion="$VERSION" -Dpackaging=aar -DgeneratePom=true
